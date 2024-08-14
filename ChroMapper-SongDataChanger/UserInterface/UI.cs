@@ -174,8 +174,8 @@ namespace ChroMapper_SongDataChanger.UserInterface
         {
             obj.transform.parent = canvas.transform;
             var dragWindow = obj.AddComponent<DragWindowController>();
-            dragWindow.canvas = canvas.GetComponent<Canvas>();
-            dragWindow.onDragWindow += posSave;
+            dragWindow._canvas = canvas.GetComponent<Canvas>();
+            dragWindow.OnDragWindow += posSave;
             return obj;
         }
         public void AttachImage(GameObject obj, Color color)

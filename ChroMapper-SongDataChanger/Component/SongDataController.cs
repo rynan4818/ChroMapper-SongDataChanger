@@ -12,10 +12,5 @@ namespace ChroMapper_SongDataChanger.Component
 {
     public class SongDataController : MonoBehaviour
     {
-        public bool dragWindowKeyEnable { get; set; }
-        public void OnShiftKey(InputAction.CallbackContext context)
-        {
-            this.dragWindowKeyEnable = context.ReadValueAsButton();
-        }
     }
 }

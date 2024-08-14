@@ -13,6 +13,7 @@ namespace ChroMapper_SongDataChanger.Configuration
 
         public float menuUIAnchoredPosX = -50;
         public float menuUIAnchoredPosY = -30;
+        public string dragEnableBinding = "<Keyboard>/shift";
 
         public static Options Instance
         {
