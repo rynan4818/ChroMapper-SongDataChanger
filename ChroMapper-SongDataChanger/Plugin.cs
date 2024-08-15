@@ -34,7 +34,7 @@ namespace ChroMapper_SongDataChanger
             songDataController = new GameObject("SongDataController").AddComponent<SongDataController>();
             menuUI = new GameObject("SongDataChanger Menu").AddComponent<MenuUI>();
             var mapEditorUI = UnityEngine.Object.FindObjectOfType<MapEditorUI>();
-            menuUI.AddMenu(mapEditorUI.MainUIGroup[5]);
+            menuUI.AddMenu(mapEditorUI);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ChroMapper_SongDataChanger.Configuration
         public static readonly string settingJsonFile = Application.persistentDataPath + "/ChroMapper-SongDataChanger.json";
 
         public float menuUIAnchoredPosX = -50;
-        public float menuUIAnchoredPosY = -30;
+        public float menuUIAnchoredPosY = -60;
         public string dragEnableBinding = "<Keyboard>/shift";
 
         public static Options Instance
