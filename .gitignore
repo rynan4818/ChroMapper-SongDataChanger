@@ -396,3 +396,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#ChroMapper-SongDataChanger-
+ChroMapper-SongDataChanger-*.zip
+ChroMapper-SongDataChanger*.dll
+temp/
