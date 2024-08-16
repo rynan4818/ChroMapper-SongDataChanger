@@ -31,7 +31,7 @@ namespace ChroMapper_SongDataChanger.Component
                .ConvertAll(s => Path.GetFileName(s));
             this.defalutSongIndex = this.songFiles.IndexOf(BeatSaberSongContainer.Instance.Song.SongFilename);
         }
-        public IEnumerator LoadAudio(string songFile)
+        public IEnumerator LoadAudio(string songFile, float offset = 0)
         {
             var song = BeatSaberSongContainer.Instance.Song;
             if (!Directory.Exists(song.Directory)) yield break;
@@ -40,7 +40,8 @@ namespace ChroMapper_SongDataChanger.Component
             {
                 yield return song.LoadAudio((clip) =>
                 {
-                    if (this.atsc.IsPlaying) this.atsc.TogglePlaying();
+                    var playing = this.atsc.IsPlaying;
+                    if (playing) this.atsc.TogglePlaying();
                     BeatSaberSongContainer.Instance.LoadedSong = clip;
                     BeatSaberSongContainer.Instance.LoadedSongSamples = clip.samples;
                     BeatSaberSongContainer.Instance.LoadedSongFrequency = clip.frequency;
@@ -51,7 +52,8 @@ namespace ChroMapper_SongDataChanger.Component
                     this.atsc.SongAudioSource.clip = clip;
                     SampleBufferManager.GenerateSamplesBuffer(clip);
                     this.audioManager.GenerateFFT(clip, Settings.Instance.SpectrogramSampleSize, Settings.Instance.SpectrogramEditorQuality);
-                }, song.SongTimeOffset, songFile);
+                    if (playing) this.atsc.TogglePlaying();
+                }, offset, songFile);
                 Debug.Log($"{songFile} Load");
             }
         }

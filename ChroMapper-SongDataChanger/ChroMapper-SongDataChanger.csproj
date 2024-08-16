@@ -35,6 +35,10 @@
       <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\Main.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="FileBrowser">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\FileBrowser.dll</HintPath>
+    </Reference>
     <Reference Include="Input">
       <HintPath>$(ChroMapperDir)\ChroMapper_Data\Managed\Input.dll</HintPath>
       <Private>False</Private>
@@ -99,11 +103,13 @@
   <ItemGroup>
     <Compile Include="Component\DragWindowController.cs" />
     <Compile Include="Component\SongDataController.cs" />
+    <Compile Include="Controller\BatchRunController.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserInterface\MenuUI.cs" />
     <Compile Include="UserInterface\UI.cs" />
+    <Compile Include="Util\TimeoutTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Icon.png" />

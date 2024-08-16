@@ -39,7 +39,7 @@ namespace ChroMapper_SongDataChanger.UserInterface
         }
         public void Update()
         {
-            QueuedActionMaps();
+            this.QueuedActionMaps();
         }
         public void QueuedActionMaps()
         {
@@ -72,33 +72,45 @@ namespace ChroMapper_SongDataChanger.UserInterface
                     this._queuedToEnable.Add(actionMap);
             }
         }
-        public UIButton AddButton(Transform parent, string title, string text, UnityAction onClick)
+        public UIButton AddButton(Transform parent, string name, string text, UnityAction onClick)
         {
-            return AddButton(parent, title, text, 12, onClick);
+            return this.AddButton(parent, name, text, 12, onClick);
         }
-        public UIButton AddButton(Transform parent, string title, string text, float fontSize, UnityAction onClick)
+        public UIButton AddButton(Transform parent, string name, string text, float fontSize, float sizeX, float sizeY, float anchorX, float anchorY, float anchorPosX, float anchorPosY, UnityAction onClick, float pivotX = 0.5f, float pivotY = 0.5f)
+        {
+            var button = this.AddButton(parent, name, text, fontSize, onClick);
+            this.MoveTransform(button.transform, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
+            return button;
+        }
+        public UIButton AddButton(Transform parent, string name, string text, float fontSize, UnityAction onClick)
         {
             var button = UnityEngine.Object.Instantiate(PersistentUI.Instance.ButtonPrefab, parent);
-            button.name = title;
+            button.name = name;
             button.Button.onClick.AddListener(onClick);
             button.SetText(text);
             button.Text.enableAutoSizing = false;
             button.Text.fontSize = fontSize;
             return button;
         }
-        public (RectTransform, TextMeshProUGUI) AddLabel(Transform parent, string title, string text, Vector2 pos, float width = 110, float height = 24)
+        public (RectTransform, TextMeshProUGUI) AddLabel(Transform parent, string name, string text, Vector2 pos, float width = 110, float height = 24)
         {
-            var label = AddLabel(parent, title, text);
-            MoveTransform(label.Item1, width, height, 0.5f, 1, pos.x, pos.y);
+            var label = this.AddLabel(parent, name, text);
+            this.MoveTransform(label.Item1, width, height, 0.5f, 1, pos.x, pos.y);
             return label;
         }
-        public (RectTransform, TextMeshProUGUI) AddLabel(Transform parent, string title, string text, TextAlignmentOptions alignment = TextAlignmentOptions.Center, float fontSize = 16)
+        public (RectTransform, TextMeshProUGUI) AddLabel(Transform parent, string name, string text, float sizeX, float sizeY, float anchorX, float anchorY, float anchorPosX, float anchorPosY, TextAlignmentOptions alignment = TextAlignmentOptions.Center, float fontSize = 16, float pivotX = 0.5f, float pivotY = 0.5f)
         {
-            var entryLabel = new GameObject(title + " Label", typeof(TextMeshProUGUI));
+            var label = this.AddLabel(parent, name, text, alignment, fontSize);
+            this.MoveTransform(label.Item1, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
+            return label;
+        }
+        public (RectTransform, TextMeshProUGUI) AddLabel(Transform parent, string name, string text, TextAlignmentOptions alignment = TextAlignmentOptions.Center, float fontSize = 16)
+        {
+            var entryLabel = new GameObject(name + " Label", typeof(TextMeshProUGUI));
             var rectTransform = (RectTransform)entryLabel.transform;
             rectTransform.SetParent(parent);
             var textComponent = entryLabel.GetComponent<TextMeshProUGUI>();
-            textComponent.name = title;
+            textComponent.name = name;
             textComponent.font = PersistentUI.Instance.ButtonPrefab.Text.font;
             textComponent.alignment = alignment;
             textComponent.fontSize = fontSize;
@@ -107,8 +119,14 @@ namespace ChroMapper_SongDataChanger.UserInterface
         }
         public (RectTransform, TextMeshProUGUI, UITextInput) AddTextInput(Transform parent, string title, string text, string value, UnityAction<string> onChange, string focusMove = null, int? roundDigits = null)
         {
-            var label = AddLabel(parent, title, text, TextAlignmentOptions.Right, 12);
-            return (label.Item1, label.Item2, AddTextInput(parent, title, value, TextAlignmentOptions.Left, 10, onChange, focusMove, roundDigits));
+            var label = this.AddLabel(parent, title, text, TextAlignmentOptions.Right, 12);
+            return (label.Item1, label.Item2, this.AddTextInput(parent, title, value, TextAlignmentOptions.Left, 10, onChange, focusMove, roundDigits));
+        }
+        public UITextInput AddTextInput(Transform parent, string title, string value, TextAlignmentOptions alignment, float fontSize, float sizeX, float sizeY, float anchorX, float anchorY, float anchorPosX, float anchorPosY, UnityAction<string> onChange, string focusMove = null, int? roundDigits = null, float pivotX = 0.5f, float pivotY = 0.5f)
+        {
+            var textInput = this.AddTextInput(parent, title, value, alignment, fontSize, onChange, focusMove, roundDigits);
+            this.MoveTransform(textInput.transform, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
+            return textInput;
         }
         public UITextInput AddTextInput(Transform parent, string title, string value, TextAlignmentOptions alignment, float fontSize, UnityAction<string> onChange, string focusMove = null, int? roundDigits = null)
         {
@@ -121,24 +139,30 @@ namespace ChroMapper_SongDataChanger.UserInterface
             textInput.InputField.textComponent.fontSize = fontSize;
             textInput.InputField.onValueChanged.AddListener(onChange);
             textInput.InputField.onEndEdit.AddListener(delegate {
-                DisableAction(this._actionMapsDisabled);
+                this.EnableAction(this._actionMapsDisabled);
             });
             textInput.InputField.onSelect.AddListener(delegate {
-                EnableAction(this._actionMapsDisabled);
+                this.DisableAction(this._actionMapsDisabled);
             });
             return textInput;
         }
         public (RectTransform, TextMeshProUGUI, Toggle) AddCheckbox(Transform parent, string title, string text, Vector2 pos, bool value, UnityAction<bool> onClick)
         {
-            var checkBox = AddCheckbox(parent, title, text, value, onClick);
-            MoveTransform(checkBox.Item1, 80, 16, 0.5f, 1, pos.x + 10, pos.y + 5);
-            MoveTransform(checkBox.Item3.transform, 100, 25, 0.5f, 1, pos.x, pos.y);
+            var checkBox = this.AddCheckbox(parent, title, text, value, onClick);
+            this.MoveTransform(checkBox.Item1, 80, 16, 0.5f, 1, pos.x + 10, pos.y + 5);
+            this.MoveTransform(checkBox.Item3.transform, 100, 25, 0.5f, 1, pos.x, pos.y);
             return checkBox;
         }
         public (RectTransform, TextMeshProUGUI, Toggle) AddCheckbox(Transform parent, string title, string text, bool value, UnityAction<bool> onClick)
         {
-            var label = AddLabel(parent, title, text, TextAlignmentOptions.Left, 12);
-            return (label.Item1, label.Item2, AddCheckbox(parent, value, onClick));
+            var label = this.AddLabel(parent, title, text, TextAlignmentOptions.Left, 12);
+            return (label.Item1, label.Item2, this.AddCheckbox(parent, value, onClick));
+        }
+        public Toggle AddCheckbox(Transform parent, bool value, float sizeX, float sizeY, float anchorX, float anchorY, float anchorPosX, float anchorPosY, UnityAction<bool> onClick, float pivotX = 0.5f, float pivotY = 0.5f)
+        {
+            var checkbox = this.AddCheckbox(parent, value, onClick);
+            this.MoveTransform(checkbox.transform, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
+            return checkbox;
         }
         public Toggle AddCheckbox(Transform parent, bool value, UnityAction<bool> onClick)
         {
@@ -151,6 +175,12 @@ namespace ChroMapper_SongDataChanger.UserInterface
             toggleComponent.isOn = value;
             toggleComponent.onValueChanged.AddListener(onClick);
             return toggleComponent;
+        }
+        public UIDropdown AddDropdown(Transform parent, List<string> options, int value, float sizeX, float sizeY, float anchorX, float anchorY, float anchorPosX, float anchorPosY, UnityAction<int> onChange, float pivotX = 0.5f, float pivotY = 0.5f)
+        {
+            var dropdown = this.AddDropdown(parent, options, value, onChange);
+            this.MoveTransform(dropdown.transform, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
+            return dropdown;
         }
         public UIDropdown AddDropdown(Transform parent, List<string> options, int value, UnityAction<int> onChange)
         {
@@ -165,9 +195,9 @@ namespace ChroMapper_SongDataChanger.UserInterface
         }
         public GameObject SetMenu(GameObject obj, CanvasGroup canvas, Action posSave, float sizeX, float sizeY, float anchorPosX, float anchorPosY, float anchorX = 1, float anchorY = 1, float pivotX = 1, float pivotY = 1)
         {
-            SetMenu(obj, canvas, posSave);
-            AttachTransform(obj, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
-            AttachImage(obj, new Color(0.24f, 0.24f, 0.24f));
+            this.SetMenu(obj, canvas, posSave);
+            this.AttachTransform(obj, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
+            this.AttachImage(obj, new Color(0.24f, 0.24f, 0.24f));
             return obj;
         }
         public GameObject SetMenu(GameObject obj, CanvasGroup canvas, Action posSave)
@@ -188,13 +218,13 @@ namespace ChroMapper_SongDataChanger.UserInterface
         public RectTransform AttachTransform(GameObject obj, float sizeX, float sizeY, float anchorX, float anchorY, float anchorPosX, float anchorPosY, float pivotX = 0.5f, float pivotY = 0.5f)
         {
             var rectTransform = obj.AddComponent<RectTransform>();
-            MoveTransform(rectTransform, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
+            this.MoveTransform(rectTransform, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
             return rectTransform;
         }
         public void MoveTransform(Transform transform, float sizeX, float sizeY, float anchorX, float anchorY, float anchorPosX, float anchorPosY, float pivotX = 0.5f, float pivotY = 0.5f)
         {
             if (!(transform is RectTransform rectTransform)) return;
-            MoveTransform(rectTransform, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
+            this.MoveTransform(rectTransform, sizeX, sizeY, anchorX, anchorY, anchorPosX, anchorPosY, pivotX, pivotY);
         }
         public void MoveTransform(RectTransform rectTransform, float sizeX, float sizeY, float anchorX, float anchorY, float anchorPosX, float anchorPosY, float pivotX = 0.5f, float pivotY = 0.5f)
         {

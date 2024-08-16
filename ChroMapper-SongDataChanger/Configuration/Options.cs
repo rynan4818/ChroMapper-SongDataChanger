@@ -12,8 +12,13 @@ namespace ChroMapper_SongDataChanger.Configuration
         public static readonly string settingJsonFile = Application.persistentDataPath + "/ChroMapper-SongDataChanger.json";
 
         public float menuUIAnchoredPosX = -50;
-        public float menuUIAnchoredPosY = -60;
+        public float menuUIAnchoredPosY = -75;
         public string dragEnableBinding = "<Keyboard>/shift";
+        public string batachFilePath = "";
+        public float batchStartTimeout = 10;
+        public float batchRunTimeout = 600;
+        public string batchUITitle = "Batch";
+        public string batchExtension = "bat";
 
         public static Options Instance
         {
