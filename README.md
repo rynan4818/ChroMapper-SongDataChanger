@@ -5,7 +5,7 @@ BeatSaberの作譜ツールの[ChroMapper](https://github.com/Caeden117/ChroMapp
 
 オフセット調整は±1, ±0.5ビート毎の調整も可能です。[ArrowVortex](https://arrowvortex.ddrnl.com/)でビート毎に何度もボタンを押すと小数点誤差から起きるズレの問題も、本プラグインでは発生しないようになっています。
 
-    ※オフセット設定は一時的なものなので、オフセット値決定後は、Audacityなどで元の曲データを直接編集してオフセット調整をしてください。
+オフセット設定は一時的なものなので、オフセット値決定後は、[Audacity](https://www.audacityteam.org/)などで元の曲データを直接編集してオフセット調整をしてください。
 
 また、選択したバッチ実行ファイルに元の曲データを渡して実行する機能もあります。
 この機能を使用して、[Demucs](https://github.com/facebookresearch/demucs)を起動して曲データをドラム・ベース・ボーカルなどに分離する方法も紹介します。
@@ -17,10 +17,24 @@ It is possible to switch between *.ogg (egg) and *.wav files in the same folder 
 
 Offset adjustment is also possible in increments of ±1 or ±0.5 beats. This plugin also prevents the problem of drift caused by decimal point errors that occurs when you press the button multiple times for each beat in [ArrowVortex](https://arrowvortex.ddrnl.com/).
 
-    ※The offset setting is temporary, so after you have determined the offset value, please adjust the offset by directly editing the original song data in Audacity or other software.
+The offset setting is temporary, so after you have determined the offset value, please adjust the offset by directly editing the original song data in [Audacity](https://www.audacityteam.org/) or other software.
 
 There is also a function that passes the original song data to the selected batch execution file and executes it.
 Using this function, we will also introduce how to start [Demucs](https://github.com/facebookresearch/demucs) and separate the song data into drums, bass, vocals, etc.
+
+![image](https://github.com/user-attachments/assets/c4ace612-294d-4121-945a-ecbc1e437d67)
+
+# 説明動画 (Explanatory Video)
+
+https://github.com/user-attachments/assets/253e412e-ee38-4f2e-95eb-c081c8302c04
+
+[Neko Hacker](https://nekohacker.com/)さんの[Chocolate Adventure feat. ななひら](https://nekohacker.com/neko-hacker/)を説明用に使用させて頂きました。
+
+[BeatSaberの譜面作成などに利用許可をして頂いています](https://docs.google.com/document/d/1RHaeGxbfUlw5LacqokJSjOxuJk8_eqD9jaqPXlYfTy0/edit)
+
+We used [Neko Hacker](https://nekohacker.com/)'s [Chocolate Adventure feat. Nanahira](https://nekohacker.com/neko-hacker/) as an explanation tool.
+
+[We have permission to use it for BeatSaber map creation, etc.](https://docs.google.com/document/d/1RHaeGxbfUlw5LacqokJSjOxuJk8_eqD9jaqPXlYfTy0/edit)
 
 # インストール方法 (How to Install)
 
@@ -46,6 +60,8 @@ Using this function, we will also introduce how to start [Demucs](https://github
 
     To separate song data with Demucs, select the batch file for executing Demucs installed with the `Batch File Select` button. Normally, `htdemucs_ft_split.bat` is recommended. If you want to separate piano guitar as well, select `htdemucs_6s_split.bat`. (However, 6s_split is not well adjusted for Demucs)
 
+![image](https://github.com/user-attachments/assets/dc4eccf9-0227-43cc-ad64-2e80ef2d4b13)
+
 3. Demucsの実行用バッチファイルを選択したら、`Batch File RUN`ボタンで実行します。分離が終わるまで少しの間待ちます。
 
     After selecting the Demucs executable batch file, click the `Batch File RUN` button to execute it. Wait a moment until the separation is complete.
@@ -62,6 +78,8 @@ Using this function, we will also introduce how to start [Demucs](https://github
 
     Finally, use the `Change` button to change the song data.
 
+# 設定パネル説明 (Explanation of the settings panel)
+![image](https://github.com/user-attachments/assets/cc66f054-814b-41d1-a8ba-d41722dad6aa)
 
 - `Song List Reload` Button
     - 曲データリストの再読込
