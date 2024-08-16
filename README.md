@@ -60,9 +60,9 @@ We used [Neko Hacker](https://nekohacker.com/)'s [Chocolate Adventure feat. Nana
 
 # 使用方法 (How to use)
 
-1. 譜面のエディタ画面でTabキーを押すと右側にアイコンパネルが出ますので、紫色の♫アイコンを押すと下の画像の様な設定パネルが表示されます。
+1. 譜面のエディタ画面でTabキーを押すと右側にアイコンパネルが出ますので、紫色の♫アイコンを押すと上の画像の様な設定パネルが表示されます。
 
-    Press the Tab key on the map editor screen to display the icon panel on the right, and then press the purple ♫ icon to display the settings panel shown in the image below.
+    Press the Tab key on the map editor screen to display the icon panel on the right, and then press the purple ♫ icon to display the settings panel shown in the image above.
 
 2. Demucsで曲データを分離する場合は、`Batch File Select`ボタンでインストールしたDemucsの実行用バッチファイルを選択します。通常は`htdemucs_ft_split.bat`を推奨します。ピアノ・ギターも分離したい場合は`htdemucs_6s_split.bat`を選択します。（ただし、6s_splitはDemucsの調整が不十分です)
 
