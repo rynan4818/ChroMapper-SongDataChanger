@@ -9,7 +9,7 @@ namespace ChroMapper_SongDataChanger.Configuration
     public class Options
     {
         private static Options instance;
-        public static readonly string settingJsonFile = Application.persistentDataPath + "/ChroMapper-SongDataChanger.json";
+        public static readonly string settingJsonFile = Application.persistentDataPath + "/SongDataChanger.json";
 
         public float menuUIAnchoredPosX = -50;
         public float menuUIAnchoredPosY = -75;
