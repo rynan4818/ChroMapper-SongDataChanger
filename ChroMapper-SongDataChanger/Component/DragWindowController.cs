@@ -23,7 +23,9 @@ namespace ChroMapper_SongDataChanger.Component
         }
         public void OnDestroy()
         {
-            this._dragEnableAction.Dispose();
+            // SetMenuした直後にSetActive(false)しているので、メニューがActiveにならないとStartが呼ばれずにOnDestroyする
+            // その場合_dragEnableActionがnullなのでnullチェックをする
+            this._dragEnableAction?.Dispose();
         }
         public void OnDragEnableKey(InputAction.CallbackContext context)
         {
