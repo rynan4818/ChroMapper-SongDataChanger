@@ -10,6 +10,10 @@ BeatSaberの作譜ツールの[ChroMapper](https://github.com/Caeden117/ChroMapp
 また、選択したバッチ実行ファイルに元の曲データを渡して実行する機能もあります。
 この機能を使用して、[Demucs](https://github.com/facebookresearch/demucs)を起動して曲データをドラム・ベース・ボーカルなどに分離する方法も紹介します。
 
+Demucsを細かい調整をして使いたい場合は、以下のGUIツールなどを参考にして下さい。
+- [Demucs Gui](https://github.com/CarlGao4/Demucs-Gui)
+- [Ultimate Vocal Remover GUI](https://github.com/Anjok07/ultimatevocalremovergui)
+
 ----
  This is a plugin that temporarily modifies the music data using the BeatSaber mapping tool [ChroMapper](https://github.com/Caeden117/ChroMapper).
 
@@ -21,6 +25,10 @@ The offset setting is temporary, so after you have determined the offset value, 
 
 There is also a function that passes the original song data to the selected batch execution file and executes it.
 Using this function, we will also introduce how to start [Demucs](https://github.com/facebookresearch/demucs) and separate the song data into drums, bass, vocals, etc.
+
+If you want to make fine adjustments to Demucs, please refer to the following GUI tools, etc.
+- [Demucs Gui](https://github.com/CarlGao4/Demucs-Gui)
+- [Ultimate Vocal Remover GUI](https://github.com/Anjok07/ultimatevocalremovergui)
 
 ![image](https://github.com/user-attachments/assets/c4ace612-294d-4121-945a-ecbc1e437d67)
 
@@ -52,9 +60,9 @@ We used [Neko Hacker](https://nekohacker.com/)'s [Chocolate Adventure feat. Nana
 
 # 使用方法 (How to use)
 
-1. 譜面のエディタ画面でTabキーを押すと右側にアイコンパネルが出ますので、紫色の♫アイコンを押すと下の画像の様な設定パネルが表示されます。
+1. 譜面のエディタ画面でTabキーを押すと右側にアイコンパネルが出ますので、紫色の♫アイコンを押すと上の画像の様な設定パネルが表示されます。
 
-    Press the Tab key on the map editor screen to display the icon panel on the right, and then press the purple ♫ icon to display the settings panel shown in the image below.
+    Press the Tab key on the map editor screen to display the icon panel on the right, and then press the purple ♫ icon to display the settings panel shown in the image above.
 
 2. Demucsで曲データを分離する場合は、`Batch File Select`ボタンでインストールしたDemucsの実行用バッチファイルを選択します。通常は`htdemucs_ft_split.bat`を推奨します。ピアノ・ギターも分離したい場合は`htdemucs_6s_split.bat`を選択します。（ただし、6s_splitはDemucsの調整が不十分です)
 
