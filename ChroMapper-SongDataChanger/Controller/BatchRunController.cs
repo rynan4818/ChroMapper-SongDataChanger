@@ -27,7 +27,7 @@ namespace ChroMapper_SongDataChanger.Controller
         public IEnumerator BatchRun()
         {
             this.IsRunning = true;
-            var songFIle = Path.Combine(BeatSaberSongContainer.Instance.Song.Directory, BeatSaberSongContainer.Instance.Song.SongFilename);
+            var songFIle = Path.Combine(BeatSaberSongContainer.Instance.Info.Directory, BeatSaberSongContainer.Instance.Info.SongFilename);
             if (!File.Exists(songFIle) || !File.Exists(Options.Instance.batachFilePath))
             {
                 this.IsRunning = false;

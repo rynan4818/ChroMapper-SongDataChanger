@@ -35,7 +35,7 @@ namespace ChroMapper_SongDataChanger.UserInterface
         public void Start()
         {
             BatchRunController.Instance.OnBatchFinished += OnBatchRunFinished;
-            this._offset = (decimal)BeatSaberSongContainer.Instance.Song.SongTimeOffset;
+            this._offset = (decimal)BeatSaberSongContainer.Instance.Info.SongTimeOffset;
         }
         public void OnDestory()
         {
@@ -121,32 +121,32 @@ namespace ChroMapper_SongDataChanger.UserInterface
             // -1beatボタン
             ui.AddButton(this._menu.transform, "Minus1beat", "-1 beat", 10, 35, 20, 1, 1, -221.1f, -119.1f, () =>
             {
-                this._offset -= 60m / (decimal)BeatSaberSongContainer.Instance.Song.BeatsPerMinute;
+                this._offset -= 60m / (decimal)BeatSaberSongContainer.Instance.Info.BeatsPerMinute;
             });
             // -0.5beatボタン
             ui.AddButton(this._menu.transform, "MinusHalfBeat", "-0.5 beat", 10, 42, 20, 1, 1, -181.2f, -119.1f, () =>
             {
-                this._offset -= 30m / (decimal)BeatSaberSongContainer.Instance.Song.BeatsPerMinute;
+                this._offset -= 30m / (decimal)BeatSaberSongContainer.Instance.Info.BeatsPerMinute;
             });
             // +0.5beatボタン
             ui.AddButton(this._menu.transform, "PlusHalfBeat", "+0.5 beat", 10, 42, 20, 1, 1, -137.4f, -119.1f, () =>
             {
-                this._offset += 30m / (decimal)BeatSaberSongContainer.Instance.Song.BeatsPerMinute;
+                this._offset += 30m / (decimal)BeatSaberSongContainer.Instance.Info.BeatsPerMinute;
             });
             // +1beatボタン
             ui.AddButton(this._menu.transform, "Plus1beat", "+1 beat", 10, 35, 20, 1, 1, -97.6f, -119.1f, () =>
             {
-                this._offset += 60m / (decimal)BeatSaberSongContainer.Instance.Song.BeatsPerMinute;
+                this._offset += 60m / (decimal)BeatSaberSongContainer.Instance.Info.BeatsPerMinute;
             });
             // リセットボタン
             ui.AddButton(this._menu.transform, "DefaultReset", "Default Reset", 12, 65, 20, 1, 1, -42.5f, -96.6f, () =>
             {
-                this._offset = (decimal)BeatSaberSongContainer.Instance.Song.SongTimeOffset;
+                this._offset = (decimal)BeatSaberSongContainer.Instance.Info.SongTimeOffset;
                 this._dropdown.Dropdown.SetValueWithoutNotify(Plugin.songDataController.defalutSongIndex);
             });
             // BPM情報ラベル
-            this._bpmLable = ui.AddLabel(this._menu.transform, "BPM", $"{BeatSaberSongContainer.Instance.Song.BeatsPerMinute} BPM", 70, 12, 1, 1, -43.6f, -112.88f, TextAlignmentOptions.Left, 10).Item2;
-            this._beatLable = ui.AddLabel(this._menu.transform, "Beat", $"1 Beat={(60m / (decimal)BeatSaberSongContainer.Instance.Song.BeatsPerMinute).ToString("F5")}sec", 70, 12, 1, 1, -43.6f, -123.1f, TextAlignmentOptions.Left, 10).Item2;
+            this._bpmLable = ui.AddLabel(this._menu.transform, "BPM", $"{BeatSaberSongContainer.Instance.Info.BeatsPerMinute} BPM", 70, 12, 1, 1, -43.6f, -112.88f, TextAlignmentOptions.Left, 10).Item2;
+            this._beatLable = ui.AddLabel(this._menu.transform, "Beat", $"1 Beat={(60m / (decimal)BeatSaberSongContainer.Instance.Info.BeatsPerMinute).ToString("F5")}sec", 70, 12, 1, 1, -43.6f, -123.1f, TextAlignmentOptions.Left, 10).Item2;
             // 実行バッチラベル
             this._batachLable = ui.AddLabel(this._menu.transform, "BatchFile", Path.GetFileName(Options.Instance.batachFilePath), 230, 16, 1, 1, -125.3f, -148.2f, TextAlignmentOptions.Left, 12).Item2;
             // バッチ実行ボタン

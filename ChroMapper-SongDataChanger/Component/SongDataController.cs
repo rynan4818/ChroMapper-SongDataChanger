@@ -26,24 +26,24 @@ namespace ChroMapper_SongDataChanger.Component
         }
         public void SongFilesUpdate()
         {
-            this.songFiles = Directory.EnumerateFiles(BeatSaberSongContainer.Instance.Song.Directory, "*.*")
+            this.songFiles = Directory.EnumerateFiles(BeatSaberSongContainer.Instance.Info.Directory, "*.*")
                .Where(e => e.EndsWith(".ogg", StringComparison.OrdinalIgnoreCase) || e.EndsWith(".egg", StringComparison.OrdinalIgnoreCase) || e.EndsWith(".wav", StringComparison.OrdinalIgnoreCase))
                .ToList()
                .ConvertAll(s => Path.GetFileName(s));
-            this.defalutSongIndex = this.songFiles.IndexOf(BeatSaberSongContainer.Instance.Song.SongFilename);
+            this.defalutSongIndex = this.songFiles.IndexOf(BeatSaberSongContainer.Instance.Info.SongFilename);
         }
         public IEnumerator LoadAudio(string songFile, float offset = 0)
         {
             if (this.IsAudioLoading) yield break;
-            var song = BeatSaberSongContainer.Instance.Song;
-            if (!Directory.Exists(song.Directory)) yield break;
+            var mapInfo = BeatSaberSongContainer.Instance.Info;
+            if (!Directory.Exists(mapInfo.Directory)) yield break;
             this.IsAudioLoading = true;
             var playing = this.atsc.IsPlaying;
             if (playing) this.atsc.TogglePlaying();
-            var fullPath = Path.Combine(song.Directory, songFile);
+            var fullPath = Path.Combine(mapInfo.Directory, songFile);
             if (File.Exists(fullPath))
             {
-                yield return song.LoadAudio((clip) =>
+                yield return BeatSaberSongExtensions.LoadAudio(mapInfo, (clip) =>
                 {
                     BeatSaberSongContainer.Instance.LoadedSong = clip;
                     BeatSaberSongContainer.Instance.LoadedSongSamples = clip.samples;
